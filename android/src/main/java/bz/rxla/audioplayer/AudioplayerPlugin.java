@@ -59,6 +59,12 @@ public class AudioplayerPlugin implements MethodCallHandler {
         seek(position);
         response.success(null);
         break;
+      case "useEarpiece" :
+        boolean use = call.arguments();
+        useEarpiece(use);
+        response.success(null);
+        break;
+
       case "mute":
         Boolean muted = call.arguments();
         mute(muted);
@@ -66,6 +72,17 @@ public class AudioplayerPlugin implements MethodCallHandler {
         break;
       default:
         response.notImplemented();
+    }
+  }
+
+
+  private void useEarpiece(boolean use) {
+    if(use) {
+      am.setMode(AudioManager.MODE_IN_COMMUNICATION);
+      am.setSpeakerphoneOn(false);
+    } else {
+      am.setMode(AudioManager.MODE_NORMAL);
+      am.setSpeakerphoneOn(true);  
     }
   }
 

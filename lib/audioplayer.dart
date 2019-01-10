@@ -46,6 +46,9 @@ class AudioPlayer {
   Future<void> play(String url, {bool isLocal: false}) async =>
       await _channel.invokeMethod('play', {'url': url, 'isLocal': isLocal});
 
+  /// Set whether to use earpiece or not
+  Future<void> useEarpiece(bool use) async => await _channel.invokeMethod('useEarpiece', use);
+
   /// Pause the currently playing stream.
   Future<void> pause() async => await _channel.invokeMethod('pause');
 
